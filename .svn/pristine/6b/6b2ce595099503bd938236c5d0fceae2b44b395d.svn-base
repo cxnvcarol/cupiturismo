@@ -1,0 +1,64 @@
+
+
+<div id="itinerarios">
+  <div id="encabezadoIt">
+    <p>Tus itinerarios</p>
+    <%= link_to '+', new_trip_path %>
+  </div>
+  <% if @trips.count==0 %>
+      <div class="itinerario"><p>Aun no tienes viajes programados</p></div>
+  <% else %>
+    <% @trips.each do |trip|%>
+       <div class="itinerario"><p id=<%= trip.id %> value=<%= trip.tittle %>><%= trip.tittle %></p>
+         <%= link_to 'Edit', edit_trip_path(trip), :class=>"llama_modal" %>
+         <%= link_to 'Destroy', trip, confirm: 'Are you sure?', method: :delete %>
+       </div>
+    <% end %>
+  <% end %>
+</div>
+<div id="googleMap"></div>
+
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false"></script>
+<script>
+    function initialize()
+    {
+        var mapProp =
+        {
+            center:new google.maps.LatLng(51.508742,-0.120850),
+            zoom:3,
+            mapTypeId:google.maps.MapTypeId.ROADMAP
+        };
+        var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+
+        var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+
+        var marker = new google.maps.Marker
+        ({
+            position: myLatlng,
+            map: map,
+            title: 'Hello World!'
+        });
+
+        $('#googleMap').css("overflow","");
+    }
+
+    function add( lat ,lon )
+    {
+        var myLatlng = new google.maps.LatLng(lat,lon);
+
+        var marker = new google.maps.Marker
+        ({
+            position: myLatlng,
+            map: map,
+            title: 'Hello World!'
+        });
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="assets/calendario.js"></script>
+<script src="assets/jquery.fancybox.js"></script>
+<script src="assets/jquery.fancybox.pack.js"></script>
+<script src="assets/tripScripts.js"></script>

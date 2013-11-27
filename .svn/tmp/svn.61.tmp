@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="2199229673">
+    <data-source source="LOCAL" name="Rails CupiTurismo: test" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="cb15cc46-66b6-4b6e-be9c-2bed1ba02fc7">
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://backus1.virtual.uniandes.edu.co/s2603grupo6</jdbc-url>
+      <user-name>s2603grupo6</user-name>
+      <user-password>dfc9dfcbdfc7dfcfdfcedfd8dfc3dfd9df99dfcbdfc4dfccdfc3dfd9dfc9dfc3dfc5dfef</user-password>
+      <libraries>
+        <library>
+          <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-license.txt</url>
+        </library>
+        <library>
+          <url>jar://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-java-5.1.26-bin.jar!/</url>
+        </library>
+      </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="Rails CupiTurismo: production" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="1f41c7ec-cb8b-4ef9-86cd-061336b6ef29">
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://backus1.virtual.uniandes.edu.co/s2603grupo6</jdbc-url>
+      <user-name>s2603grupo6</user-name>
+      <user-password>dfc9dfcbdfc7dfcfdfcedfd8dfc3dfd9df99dfcbdfc4dfccdfc3dfd9dfc9dfc3dfc5dfef</user-password>
+      <libraries>
+        <library>
+          <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-license.txt</url>
+        </library>
+        <library>
+          <url>jar://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-java-5.1.26-bin.jar!/</url>
+        </library>
+      </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="Rails CupiTurismo: development" product="MySQL" version="5.5.32-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} )" uuid="46b28e20-86ea-49b0-8607-da0780324873">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://backus1.virtual.uniandes.edu.co/s2603grupo6</jdbc-url>
+      <user-name>s2603grupo6</user-name>
+      <user-password>dfc9dfcbdfc7dfcfdfcedfd8dfc3dfd9df99dfcbdfc4dfccdfc3dfd9dfc9dfc3dfc5dfef</user-password>
+      <libraries>
+        <library>
+          <url>jar://$PROJECT_DIR$/mysql-connector-java-5.1.26-bin.jar!/</url>
+        </library>
+        <library>
+          <url>file://$PROJECT_DIR$/mysql-connector-license.txt</url>
+        </library>
+      </libraries>
+    </data-source>
+  </component>
+</project>
+

@@ -1,0 +1,126 @@
+
+
+<div id="xxEncabeza">
+  <h1><%= @trip.tittle %></h1>
+  <p><%= @trip.begin_date.strftime('%d/%m/%Y') %> - <%= @trip.end_date.strftime('%d/%m/%Y') %></p>
+</div>
+
+<div id="xxCiudades" cuantas="<%= @trip.trip_cities.count %>">
+  <div class="headd" >Ciudades a visitar</div>
+  <% @trip.trip_cities.each do |tc| %>
+      <div class="xxCiudad" tcid ="<%= tc.id %>"><p><%= tc.city_name %> <span class = "fecha"><%= tc.start_date.strftime('%d/%m/%Y')%> - <%= tc.end_date.strftime('%d/%m/%Y') %> </span></p></div>
+  <% end %>
+</div>
+
+<div id="xxEventos">
+  <div class="headd">Eventos en </div>
+</div>
+
+<!--<%= render 'form_edit' %>-->
+
+<!--<%= link_to 'Back', trips_path %>-->
+
+<div id="xxGaleria">
+  <div class="headd">Galer&iacute;a</div>
+  <div id="marco" cuantas="<%= @trip.photos.count %>">
+    <% if @trip.photos.count==0 %>
+        <%= image_tag "no-image.jpg", :width => "370px", :height => "400px" %>
+    <% else %>
+        <% @trip.photos.each_with_index do |photo, index| %>
+            <%= image_tag photo.content.url, :style => "position:absolute; display:none;" , :width => "370px", :height => "400px", :index => index%>
+        <% end %>
+    <% end %>
+  </div>
+  <button id="prev"><-</button> <button id="next">-></button>
+</div>
+
+<!--<div id="xxImagenes">
+  <div class="headd">Agregar imagen</div>
+  <div>
+
+  </div>
+</div> -->
+
+
+<!--<script type="text/javascript" src="/assets/jquery.slides.js"></script>-->
+<script>
+    $(function() {
+        $('#slides').slidesjs({
+            width: 450,
+            height: 200,
+            start: 1
+        });
+    });
+</script>
+<script type="text/javascript">
+    var cuantas = 0;
+    var actual = 0;
+    $(function () {
+        $('input[type=file]').each(function () {
+            var fileUpload = $(this);
+            var textBox = $('<input type="text" id="barra" />');
+            textBox.css('width',370).css('margin', 10).prop('disabled', fileUpload.prop('disabled'));
+            var button = $('<input type="button" value="Examinar" id="xxEx" />').prop('disabled', fileUpload.prop('disabled'));
+            fileUpload.change(function () {
+                textBox.val(fileUpload.val());
+            });
+            button.click(function () {
+                fileUpload.click();
+            });
+            fileUpload.after(button).after(textBox);
+            fileUpload.hide();
+        });
+
+        cuantas = $("#marco").attr("cuantas");
+        if(actual<cuantas){
+            $("#marco img[index='0']").css("display","block");
+        }
+
+        $("#prev").click(function(){
+            if(actual-1>=0){
+                $("#marco img[index='"+actual+"']").css("display","none");
+                actual = actual -1;
+                $("#marco img[index='"+actual+"']").css("display","block");
+            }
+            console.log(cuantas);
+            console.log(actual);
+        });
+
+        $("#next").click(function(){
+            if(actual+1<cuantas){
+                $("#marco img[index='"+actual+"']").css("display","none");
+                actual = actual + 1;
+                $("#marco img[index='"+actual+"']").css("display","block");
+            }
+            console.log(cuantas);
+            console.log(actual);
+        });
+        $(".xxCiudad").click(function(){
+            var id = $(this).attr("tcid");
+            var nombre = $(this).text().split(" ")[0];
+            $.ajax({
+               url:"/trip_cities/info_events/"+id+".json",
+               type: "GET",
+               dataType : "json",
+               success: function( json ) {
+                  $("#xxEventos .headd").text("Eventos en "+ nombre);
+
+                   $.each(json,function(i, item){
+                       console.log(json[0].name);
+                       var $k = ($("<div>",{"class":"xxEvn"}));
+                       $k.append($("<p>"+item.name.substr(0,50)+"</p>"));
+                       $("#xxEventos").append($k);
+                   });
+               },
+               error: function( xhr, status ) {
+                   //alert( "Sorry, there was a problem!" );
+                   console.log('errorItinerarioClick: '+xhr+"- "+status);
+                   //better don't show
+               }
+            });
+        });
+    });
+</script>
+
+<script src="/assets/tripScripts.js"></script>
+

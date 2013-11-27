@@ -1,0 +1,14 @@
+class CreateComments < ActiveRecord::Migration
+  def change
+    create_table :comments do |t|
+      t.string :author
+      t.datetime :date
+      t.integer :rating
+      t.string :text
+      t.references :event
+
+      t.timestamps
+    end
+    add_index :comments, :event_id
+  end
+end

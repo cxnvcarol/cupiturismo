@@ -1,0 +1,46 @@
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Ciudad:</b>
+  <%= @trip_city.city_name %>
+</p>
+<p> Estarás en la ciudad desde el día <%= @trip_city.start_date.strftime("%d/%m/%Y") %> hasta el día <%= @trip_city.end_date.strftime("%d/%m/%Y") %>.</p>
+
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Fecha de inicio</th>
+    <th>Fecha Fin</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @trip_city.events.each do |event| %>
+      <tr>
+        <td><%= event.name %></td>
+        <td><%= event.begin_date %></td>
+        <td><%= event.end_date %></td>
+        <td><%= link_to 'Ver detalles', event %></td>
+        <td><%= link_to 'Borrar', event, confirm: 'Estás segur@?', method: :delete %></td>
+      </tr>
+  <% end %>
+</table>
+
+
+<%= link_to 'Nuevo Evento', new_event_path(:trip_city_id=>@trip_city.id) %>
+<!--<a href="#modal_new_event" class="llama_modal">Nuevo evento</a>-->
+
+<div id="modal_new_event" style="display: none;">
+  <a class="link_modal" href="/events/search_date/<%= @trip_city.id %>">Busca eventos en tu ciudad</a>
+  <div class="link_modal">o</div><br/>
+  <a class="link_modal" href="#modal_new_own_event" class="llama_modal">Agrega tu propio evento</a>
+
+</div>
+
+<div id="modal_new_own_event" style="display: none;">
+  <% render 'events/form' %>
+  <%= link_to 'Back', trip_city_path(@trip_city) %>
+  <!-- TODO Render form for new event from here (trip city context)-->
+</div>

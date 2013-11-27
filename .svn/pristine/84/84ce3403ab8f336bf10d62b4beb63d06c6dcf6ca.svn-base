@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+<!--TODO customize this view!!! (as a partial view?)-->
+<p>
+  <b>Begin date:</b>
+  <%= @event.begin_date %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @event.description %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%= @event.end_date %>
+</p>
+
+<p>
+  <b>Id:</b>
+  <%= @event.id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @event.name %>
+</p>
+
+<p>
+  <b>Picture link:</b>
+  <%= @event.picture_link %>
+</p>
+
+<p>
+  <b>Rating:</b>
+  <%= @event.rating %>
+</p>
+
+<p>
+   M&aacute;s informaci&oacute;n <a target="_blank" href=<%= @event.url %> >aqu&iacute;</a>
+</p>
+
+
+
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>

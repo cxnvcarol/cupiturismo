@@ -1,0 +1,29 @@
+
+
+<div id="itinerarios">
+  <div id="encabezadoIt">
+    <p>Tus itinerarios</p>
+    <%= link_to '+', new_trip_path %>
+  </div>
+  <% if @trips.count==0 %>
+      <div class="itinerario"><p>Aun no tienes viajes programados</p></div>
+  <% else %>
+    <% @trips.each do |trip|%>
+       <div class="itinerario"><p id=<%= trip.id %> value=<%= trip.tittle %>><%= trip.tittle %></p>
+         <%= link_to 'Edit', edit_trip_path(trip), :class=>"llama_modal" %>
+         <%= link_to 'Destroy', trip, confirm: 'Are you sure?', method: :delete %>
+       </div>
+    <% end %>
+  <% end %>
+</div>
+
+<div id="mapa">
+
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="assets/calendario.js"></script>
+<script src="assets/jquery.fancybox.js"></script>
+<script src="assets/jquery.fancybox.pack.js"></script>
+<script src="assets/tripScripts.js"></script>

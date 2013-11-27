@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>City:</b>
+  <%= @trip_city.city_name %>
+</p>
+
+
+<p>
+  <b>Transport:</b>
+  <%= @trip_city.transport %>
+</p>
+
+
+
+<%= link_to 'Edit', edit_trip_city_path(@trip_city) %> |
+<%= link_to 'Back', trip_cities_path %>
+<%= link_to 'Nuevo Evento', new_event_path(:trip_city_id=>@trip_city.id) %>

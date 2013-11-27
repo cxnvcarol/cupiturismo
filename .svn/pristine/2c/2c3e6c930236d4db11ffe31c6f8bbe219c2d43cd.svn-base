@@ -1,0 +1,5 @@
+class TripCity < ActiveRecord::Base
+  belongs_to :trip
+  has_many :events
+ # has_one :city
+end

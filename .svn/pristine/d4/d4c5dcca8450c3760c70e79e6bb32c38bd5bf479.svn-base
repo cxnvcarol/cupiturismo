@@ -1,0 +1,71 @@
+<p id="notice"><%= notice %></p>
+
+<%= form_for(@user) do |f| %>
+    <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+          <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+
+<div class="field">
+  <%= f.label :Nombre %><br />
+  <%= f.text_field :name %>
+</div>
+
+    <div class="field">
+      <%= f.label :imagen %><br />
+      <%= f.file_field :image %>
+    </div>
+
+<div class="field">
+  <%= f.label :email %><br />
+  <%= f.text_field :email %>
+</div>
+
+<div class="field">
+  <%= f.label :Telefono %><br />
+  <%= f.text_field :Telephone %>
+</div>
+
+
+<div class="field">
+  <%= f.label :Pais %><br />
+  <%= f.text_field :Country %>
+</div>
+
+<div class="field">
+  <%= f.label :Ciudad %><br />
+  <%= f.text_field :City %>
+</div>
+
+<div class="field">
+  <%= f.label :Direccion %><br />
+  <%= f.text_field :Address %>
+</div>
+
+<div class="field">
+  <%= f.label :Genero %><br />
+  <%= f.text_field :Gender %>
+</div>
+
+
+
+<div class="field">
+      <%= f.label :Birthday %><br />
+      <%= f.text_field :Birthday %>
+    </div>
+  <div class="actions">
+      <%= f.submit %>
+  </div>
+
+
+
+<%= link_to 'Back', users_path %>
+<% end %>

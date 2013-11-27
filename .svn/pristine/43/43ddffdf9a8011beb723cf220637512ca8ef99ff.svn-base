@@ -1,0 +1,39 @@
+<h1>Editar <%= @trip.tittle %></h1>
+
+<%= render 'form_edit' %>
+
+<%= link_to 'Back', trips_path %>
+<h1>Galer&iacute;a</h1>
+
+<% if @trip.photos.count==0 %>
+    <p>A&uacute;n no tienes fotos del viaje</p>
+<% else %>
+    <div class="container">
+      <div id="slides">
+        <% @trip.photos.each do |photo| %>
+            <%= image_tag photo.content.url %>
+        <% end %>
+      </div>
+    </div>
+<% end %>
+<%= form_for @photo, :url=>'../upload_photo/'+@photo.trip_id.to_s(), :html => { :multipart => true } do |form| %>
+    <%= form.file_field :content %>
+    <%= hidden_field :trip_id,@photo.trip_id %>
+    <br/>
+    <%= form.submit "Agregar foto" %>
+<% end %>
+
+<!--<script type="text/javascript" src="/assets/jquery.slides.js"></script>-->
+<script>
+    $(function() {
+        $('#slides').slidesjs({
+            width: 450,
+            height: 200
+        });
+    });
+</script>
+
+
+
+<script src="/assets/tripScripts.js"></script>
+

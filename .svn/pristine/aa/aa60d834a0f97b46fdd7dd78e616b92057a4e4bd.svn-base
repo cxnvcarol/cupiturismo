@@ -1,0 +1,18 @@
+#Given(/^I am on the home page$/) do
+ # pending # express the regexp above with the code you wish you had
+#end
+#Then(/^I should see "(.*?)"$/) do |arg1|
+ # pending # express the regexp above with the code you wish you had
+#end
+
+When /^I fill register form$/ do
+  visit 'http://localhost:3000/users/sign_in'
+  fill_in('user_name', :with => "John")
+  fill_in('user_email', :with => "john@mail.me")
+  fill_in('user_password', :with => "qwerty123")
+  fill_in('user_password_confirmation', :with => "qwerty123")
+  click_button("commit")
+end
+Then /^I should see "Bienvenid@ John"$/ do |text|
+  page.should have_content(text)
+end

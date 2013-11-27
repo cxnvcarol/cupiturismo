@@ -1,0 +1,53 @@
+<h1>Eventos encontrados</h1>
+
+<% if @results.count()==0%>
+
+<div id="sin_eventos">No se encontraron eventos para esta ciudad</div>
+
+<% else %>
+    <%= text_field_tag(:trip_city_id, @trip_city.id, :hidden=>'hidden') %>
+    <a href="/events/search_advanced/<%=@trip_city.id%>" class="busq_av">Búsqueda avanzada aquí</a>
+
+<% @results.each do |result| %>
+
+    <div class="item_event">
+        <h2><%= result['title']%></h2>
+        <label>Fecha de inicio: </label><label><%= result['start_time']%></label>     <br/>
+        <label>Fecha fin: </label><label><%= result['stop_time']%></label>  <br/>
+        <br/>
+          <% unless result['image'].nil? %>
+            <img src="<%= result['image']['medium']['url'].to_s()%>" style="float:left; margin-right: 20px" />
+          <%end %>
+      <div style="text-align: justify">
+        <%= raw result['description']%>
+      </div>
+
+      <p style="clear:both;">Más información <a target="_blank" href=<%= result['url'] %> >aquí</a></p>
+      <%= form_tag :action => 'add_eventful_event' %>
+          <%= hidden_field_tag(:name, result['title'].to_s()) %>
+          <%= hidden_field_tag(:begin_date, result['start_time'].to_s()) %>
+          <%= hidden_field_tag(:end_date, result['stop_time'].to_s()) %>
+          <%= hidden_field_tag(:description, result['description'].to_s()) %>
+          <%= hidden_field_tag(:url, result['url'].to_s()) %>
+          <%= hidden_field_tag(:eventful_id, result['id'].to_s()) %>
+          <% if result['image'].nil? %>
+              <%= hidden_field_tag(:picture_link, "") %>
+          <%else%>
+              <%= hidden_field_tag(:picture_link, result['image']['medium']['url'].to_s()) %>
+          <%end %>
+
+          <%= hidden_field_tag(:name, result['title'].to_s()) %>
+      <%= hidden_field_tag(:latitude, result['latitude']) %>
+      <%= hidden_field_tag(:longitude, result['longitude']) %>
+          <%= hidden_field_tag(:trip_city_id, @trip_city.id) %>
+          <input type="submit" value="Agregar evento">
+      </form>
+
+      </div>
+
+      <br/>
+
+<% end %>
+<% end %>
+
+

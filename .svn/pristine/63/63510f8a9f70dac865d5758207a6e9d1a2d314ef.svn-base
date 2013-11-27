@@ -1,0 +1,71 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Tittle:</b>
+  <%= @trip.tittle %>
+</p>
+
+<p>
+  <b>Begin date:</b>
+  <%= @trip.begin_date.month %> / <%= @trip.begin_date.day%> /  <%= @trip.begin_date.year%>
+</p>
+<p>
+  <b>Created at:</b>
+  <%= @trip.created_at.month %>/<%= @trip.created_at.day%>/<%= @trip.created_at.year%>
+</p>
+
+<p>
+  <b>User Id:</b>
+  <%= @trip.user_id %>
+</p>
+<p>
+  <b>User Name:</b>
+  <%= @trip.user.name%>
+</p>
+
+
+<table>
+  <tr>
+    <th>City</th>
+    <th>Id</th>
+    <th>Transport</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @trip.trip_cities.each do |trip_city| %>
+      <tr>
+        <td><%= trip_city.city %></td>
+        <td><%= trip_city.id %></td>
+        <td><%= trip_city.transport %></td>
+        <td><%= link_to 'Show', trip_city %></td>
+        <td><%= link_to 'Edit', edit_trip_city_path(trip_city) %></td>
+        <td><%= link_to 'Destroy', trip_city, confirm: 'Are you sure?', method: :delete %></td>
+      </tr>
+  <% end %>
+</table>
+<h1>-------------------------------------------------------------------------------------------------------</h1>
+<h2>Add a city:</h2>
+
+<%= form_for([@trip, @trip.trip_cities.build]) do |f| %>
+    <div class="field">
+      <%= f.label :city %><br />
+      <%= f.text_field :city %>
+    </div>
+    <div class="field">
+      <%= f.label :id %><br />
+      <%= f.number_field :id %>
+    </div>
+    <div class="field">
+      <%= f.label :transport %><br />
+      <%= f.text_field :transport %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>
+<h1>-------------------------------------------------------------------------------------------------------</h1>
+<br />
+<%= link_to 'Edit', edit_trip_path(@trip) %> |
+<%= link_to 'Back', trips_path %>

@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Tittle:</b>
+  <%= @trip.tittle %>
+</p>
+
+<p>
+  <b>Begin date:</b>
+  <%= @trip.begin_date.month %> / <%= @trip.begin_date.day%> /  <%= @trip.begin_date.year%>
+</p>
+<p>
+  <b>Created at:</b>
+  <%= @trip.created_at.month %>/<%= @trip.created_at.day%>/<%= @trip.created_at.year%>
+</p>
+
+<p>
+  <b>User Id:</b>
+  <%= @trip.user_id %>
+</p>
+<p>
+  <b>User Name:</b>
+  <%= @trip.user.name%>
+</p>
+ <h1>Ciudades</h1>
+
+<table>
+  <tr>
+
+    <th>Ciudad</th>
+    <th>Transporte</th>
+    <th></th>
+    <th></th>
+
+  </tr>
+
+  <% @trip.trip_cities.each do |trip_city| %>
+      <tr>
+
+        <td><%= trip_city.city_name %></td>
+        <td><%= trip_city.transport %></td>
+        <td><%= link_to 'Ver detalles', trip_city %></td>
+      </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Back', :controller => 'trips', :action => 'all' %>

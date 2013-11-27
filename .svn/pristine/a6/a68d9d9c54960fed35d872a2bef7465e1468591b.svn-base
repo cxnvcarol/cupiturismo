@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  city: 
+  id: 1
+  transport: MyString
+  trip: 
+
+two:
+  city: 
+  id: 1
+  transport: MyString
+  trip: 

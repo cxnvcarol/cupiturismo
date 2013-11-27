@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  author: MyString
+  date: 2013-09-15 18:14:02
+  rating: 1
+  text: MyString
+ # event:
+
+two:
+  author: MyString
+  date: 2013-09-15 18:14:02
+  rating: 1
+  text: MyString
+ # event:
+
+<% 1000.times do |n| %>
+comment_<%= n %>:
+
+    author: <%= "user#{n}" %>
+    date: Time.now
+    rating: 1
+    text: <%= "asd{n}" %>
+   # event:
+<% end %>

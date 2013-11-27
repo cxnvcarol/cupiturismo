@@ -1,0 +1,7 @@
+class Trip < ActiveRecord::Base
+  belongs_to :user
+  has_many :trip_cities
+  has_many :photos
+  accepts_nested_attributes_for :photos,:trip_cities, :allow_destroy => :true,
+                                :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
+  end

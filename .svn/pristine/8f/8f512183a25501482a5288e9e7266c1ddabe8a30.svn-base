@@ -1,0 +1,7 @@
+require 'test_helper'
+
+class CommentTest < ActiveSupport::TestCase
+     test "example" do
+       assert_equal( "asd20", comments:comment_20.text )
+     end
+end

@@ -1,0 +1,10 @@
+<div id="wrapper">
+<h1>Editar <%= @trip.tittle %></h1>
+
+<%= render 'form_edit' %>
+
+<%= link_to 'Back', trips_path %>
+
+<script src="/assets/tripScripts.js"></script>
+
+</div>

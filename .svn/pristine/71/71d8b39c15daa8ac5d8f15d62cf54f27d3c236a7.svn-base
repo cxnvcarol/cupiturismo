@@ -1,0 +1,326 @@
+/**
+ * Created with JetBrains RubyMine.
+ * User: Nicolas
+ * Date: 24/09/13
+ * Time: 21:53
+ * To change this template use File | Settings | File Templates.
+ */
+var fu= new Date();
+
+var inicioViajeActual = null;
+var finViajeActual = null;
+var idItienerarioActual = null;
+
+function compararFechas(arg1, arg2){
+    //caso en el que son el mismo anio
+    if(arg1.getFullYear()== arg2.getFullYear()){
+        if(arg1.getMonth()== arg2.getMonth()){
+            if(arg1.getDate() == arg2.getDate()){
+                return 0;
+            }
+            else if(arg1.getDate()>arg2.getDate()){
+                return 2;
+            }
+            else{
+                return -2;
+            }
+        }
+        else if(arg1.getMonth()>arg2.getMonth()){
+            return 3;
+        }
+        else{
+            return -3;
+        }
+    }
+    //caso en el que el arg1 es despues del arg2
+    else if(arg1.getFullYear()> arg2.getFullYear()){
+        return 1;
+    }
+    //caso en el que el arg2 es antes del arg1
+    else{
+        return -1;
+    }
+}
+
+function pintar(){
+    if(inicioViajeActual==null && finViajeActual==null){
+        console.log(99);
+    }
+    else if((compararFechas(finViajeActual, inicioViajeActual)==2 || compararFechas(inicioViajeActual, finViajeActual)==0 ) && (compararFechas(finViajeActual,fu)==0 || compararFechas(finViajeActual,fu)==-2)){
+        console.log(1);
+
+        console.log("dia inicio: "+inicioViajeActual.getDate());
+        console.log("dia fin: "+finViajeActual.getDate());
+        $(".m").each(function(){
+            var diaActual = $(this).text();
+            console.log(diaActual);
+            if(diaActual>=inicioViajeActual.getDate() && diaActual<=finViajeActual.getDate()){
+                $(this).addClass("viajando");
+            }
+        });
+    }
+    else if((compararFechas(inicioViajeActual,fu)==0 || compararFechas(inicioViajeActual,fu)==-2) && compararFechas(finViajeActual,fu)==3){
+        console.log(2);
+        $(".m").each(function(){
+            var diaActual = $(this).text();
+            if(diaActual>=inicioViajeActual.getDate()){
+                $(this).addClass("viajando");
+            }
+        });
+    }
+    else if(compararFechas(inicioViajeActual,fu)==-3 && (compararFechas(fu,finViajeActual)==2||compararFechas(finViajeActual,fu)==0)){
+        console.log(3);
+        $(".m").each(function(){
+            var diaActual = $(this).text();
+            if(diaActual<=finViajeActual.getDate()){
+                $(this).addClass("viajando");
+            }
+        });
+    }
+    else if(compararFechas(inicioViajeActual,fu)==-3 && compararFechas(finViajeActual,fu)==3 ){
+        console.log(4);
+        $(".m").each(function(){
+            $(this).addClass("viajando");
+        });
+    }
+    else{
+        console.log("no llego a ningun caso");
+    }
+}
+
+function resaltar(fecha_inicial, fecha_final){
+    var arreglo = fecha_inicial.split("-");
+    console.log("resaltar: "+arreglo[2]);
+    var f_inicial =new Date(arreglo[0],arreglo[1]-1,arreglo[2],0,0,0,0);
+    fu = new Date(arreglo[0],arreglo[1]-1,arreglo[2],0,0,0,0);
+    inicioViajeActual = new Date(arreglo[0],arreglo[1]-1,arreglo[2],0,0,0,0);
+    console.log(inicioViajeActual.getDate());
+    arreglo = fecha_final.split("-");
+    console.log("resaltarF: "+arreglo[2]);
+    var f_final =new Date(arreglo[0],arreglo[1]-1,arreglo[2],0,0,0,0);
+    finViajeActual = f_final;
+
+    //Esto me lleva al mes en el cual inicia el viaje
+    sm(f_inicial);
+    $(".semana").remove();
+    gc(f_inicial,$tabla);
+}
+
+$(".itinerario").click(function(){
+        var id_itinerario = $(this).find("p").attr("id");
+        idItienerarioActual=id_itinerario;
+        $.ajax({
+            url: "/trips/"+id_itinerario,
+            type: "GET",
+            dataType : "json",
+            success: function( json ) {
+                var fecha_inicial = json.begin_date.split("T")[0];
+                var fecha_final = json.end_date.split("T")[0];
+                console.log(fecha_inicial);
+                console.log(fecha_final);
+                resaltar(fecha_inicial,fecha_final);
+            },
+            error: function( xhr, status ) {
+                //alert( "Sorry, there was a problem!" );
+                console.log('errorItinerarioClick: '+xhr+"- "+status);
+                //better don't show
+            }
+        });
+    }
+);
+
+//Get name of a day
+function gnd(f)
+{
+    var d = f.getDay();
+    switch(d){
+        case 0:
+            return "Domingo "+f.getDate()+" de "+gnm(f.getMonth());
+        case 1:
+            return "Lunes "+f.getDate()+" de "+gnm(f.getMonth());
+        case 2:
+            return "Martes "+f.getDate()+" de "+gnm(f.getMonth());
+        case 3:
+            return "Miercoles "+f.getDate()+" de "+gnm(f.getMonth());
+        case 4:
+            return "Jueves "+f.getDate()+" de "+gnm(f.getMonth());
+        case 5:
+            return "Viernes "+f.getDate()+" de "+gnm(f.getMonth());
+        case 6:
+            return "Sabado "+f.getDate()+" de "+gnm(f.getMonth());
+    }
+}
+
+//Get Days in a Month, retorna el numero de dias por mes
+function gdm(m)
+{
+    switch (m) {
+        case 1:
+            return 28;
+        case 3:
+            return 30;
+        case 5:
+            return 30;
+        case 8:
+            return 30;
+        case 10:
+            return 30;
+        default:
+            return 31;
+    }
+}
+
+//Get Name of the Month, retorna el nombre del mes
+
+function gnm(m)
+{
+    switch (m) {
+        case 0:
+            return 'Enero';
+        case 1:
+            return 'Febrero';
+        case 2:
+            return 'Marzo';
+        case 3:
+            return 'Abril';
+        case 4:
+            return 'Mayo';
+        case 5:
+            return 'Junio';
+        case 6:
+            return 'Julio';
+        case 7:
+            return 'Agosto';
+        case 8:
+            return 'Septiembre';
+        case 9:
+            return 'Octubre';
+        case 10:
+            return 'Noviembre';
+        case 11:
+            return 'Diciembre';
+        default:
+            return 'Mes invalido';
+    }
+}
+
+//Crea la tabla y el header de la tabla con el mes
+$("#wrapper").append($("<div/>",{id:"calendario"}));
+$("#calendario").append($("<table/>",{id:"cal"}));
+$tabla = $("#calendario > table").append($("<tr/>"));
+$filaActual = $("tr");
+$filaActual.append($("<th/>",{id:"ant",text:"<"}).click(function (){
+    fu.getMonth()==0?fu.setFullYear(fu.getFullYear()-1, 11, 1):fu.setFullYear(fu.getFullYear(), fu.getMonth()-1, 1);
+    sm(fu);
+    $(".semana").remove();
+    gc(fu,$tabla);
+}));
+$filaActual.append($("<th/>",{id:"mes",text:"Mes", colspan:"5"}));
+$filaActual.append($("<th/>",{id:"sig",text:">"}).click(function (){
+    fu.getMonth()==11?fu.setFullYear(fu.getFullYear()+1, 0, 1):fu.setFullYear(fu.getFullYear(), fu.getMonth()+1, 1);
+    sm(fu);
+    $(".semana").remove();
+    gc(fu,$tabla);
+}));
+$filaActual = $("<tr/>",{id:"dias"}).appendTo($($tabla));
+$filaActual.append($("<td>D</td>"));
+$filaActual.append($("<td>L</td>"));
+$filaActual.append($("<td>M</td>"));
+$filaActual.append($("<td>I</td>"));
+$filaActual.append($("<td>J</td>"));
+$filaActual.append($("<td>V</td>"));
+$filaActual.append($("<td>S</td>"));
+
+function gc(fecha,tabla)
+{
+    var dia=fecha.getDate();
+    var actual = fecha;
+    var mesAnterior = actual.getMonth()-1<0?11:actual.getMonth()-1;
+    var mesSiguiente = actual.getMonth()+1>11?1:actual.getMonth()+1;
+
+    var filaActual = $("<tr/>",{"class":"semana"}).appendTo(tabla);
+    //crea los ultimos dias del mes anterior
+    var auxiliar = new Date(mesAnterior==11?actual.getFullYear()-1:actual.getFullYear(),mesAnterior,gdm(mesAnterior));
+    var diaAuxiliar = auxiliar.getDay();
+    if(diaAuxiliar!=6){
+        var empiezaEn = gdm(auxiliar.getMonth())-diaAuxiliar;
+        for(var i= empiezaEn;i<=gdm(mesAnterior);i++)
+        {
+            filaActual.append($("<td/>",{text:""+i,"class":"nm"}));
+        }
+    }
+    //crea los dias del mes
+    for(var i=1; i<=gdm(actual.getMonth());i++)
+    {
+        actual.setDate(i);
+
+        if(actual.getDay()!=0&&actual.getDay()%6==0)
+        {
+            filaActual.append($("<td/>",{text:""+i,"class":"m"}));
+            filaActual= $("<tr/>",{"class":"semana"}).appendTo(tabla);
+            continue;
+        }
+        filaActual.append($("<td/>",{text:""+i,"class":"m"}));
+    }
+    var k=1;
+    for(var i=actual.getDay();i<6;i++)
+    {
+        filaActual.append($("<td/>",{text:""+k,"class":"nm"}));
+        k++;
+    }
+    //$('td.m:contains("'+dia+'"):first').attr("id","hoy");
+    $("#cal tr:not(:first):not(:first)").each(function(i,e){
+        $(this).children(":not(:first)").css("border-left","1px solid #2f5bb7");});
+    console.log("llegando a pintar");
+    //fu.setDate(1);
+    pintar();
+}
+
+//cambia el encabezado del mes al mes con ano
+function sm(f)
+{
+    $("#mes").text(gnm(f.getMonth())+" de "+f.getFullYear());
+}
+
+
+gc(new Date(),$tabla);
+sm(new Date());
+
+function cd(f)
+{
+    var dia = f;
+    var $hpd = $("<div/>",{id:"hpd"}).appendTo($("#wrapper"));
+    $hpd.append("<p>");
+    $("#hpd>p").text(gnd(f));
+    var $panel=$("<div/>",{id:"panelDia"}).appendTo($("#wrapper"));
+    $panel.append($("<div/>",{id:"horas"}));
+    $panel.append($("<div/>",{"class":"scrollbar"}).append($("<div/>",{"class":"scroll"})));
+
+    for(var i=0;i<24;i++)
+    {
+        var k= i<10?"0"+i+":00":i+":00";
+        $("#horas").append($("<div/>",{id:"pdh"+i,"class":"hora"}).append($("<p/>",{text:k})));
+    }
+    var parH = $('#panelDia').outerHeight(true);
+    var areaH = $('#horas').outerHeight(true);
+
+    $('.scroll').draggable({
+        axis: 'y',
+        containment: 'parent',
+        drag: function() {
+            var scrPos = $('.scroll').position().top;
+            $('#horas').css({top: -(scrPos*(areaH/parH))-1});
+        }
+
+    });
+}
+cd(fu);
+
+$(".viajando").click(function(){
+    var parametroFecha = fu.getDate()+"-"+fu.getMonth()+"-"+fu.getFullYear();
+    $.ajax({
+         url:"trips/info_events/"+idItienerarioActual+".json?date_param="+parametroFecha,
+
+    });
+});
+

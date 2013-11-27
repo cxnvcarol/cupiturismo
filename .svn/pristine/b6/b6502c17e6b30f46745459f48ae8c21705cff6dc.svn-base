@@ -1,0 +1,77 @@
+class TripCitiesController < ApplicationController
+  # GET /trip_cities
+  # GET /trip_cities.json
+  def index
+    @trip_cities = TripCity.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @trip_cities }
+    end
+  end
+
+  # GET /trip_cities/1
+  # GET /trip_cities/1.json
+  def show
+    @trip_city = TripCity.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @trip_city }
+    end
+  end
+
+  # GET /trip_cities/new
+  # GET /trip_cities/new.json
+  def new
+    @trip_city = TripCity.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @trip_city }
+    end
+  end
+
+  # GET /trip_cities/1/edit
+  def edit
+    @trip_city = TripCity.find(params[:id])
+  end
+
+  # POST /trip_cities
+  # POST /trip_cities.json
+  def create
+    @trip = Trip.find(params[:trip_id])
+    @trip_city = @trip.trip_cities.create(params[:trip_city])
+
+    redirect_to trip_path(@trip)
+
+  end
+
+  # PUT /trip_cities/1
+  # PUT /trip_cities/1.json
+  def update
+    @trip_city = TripCity.find(params[:id])
+
+    respond_to do |format|
+      if @trip_city.update_attributes(params[:trip_city])
+        format.html { redirect_to @trip_city, notice: 'Trip city was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @trip_city.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /trip_cities/1
+  # DELETE /trip_cities/1.json
+  def destroy
+    @trip_city = TripCity.find(params[:id])
+    @trip_city.destroy
+
+    respond_to do |format|
+      format.html { redirect_to trip_cities_url }
+      format.json { head :no_content }
+    end
+  end
+end

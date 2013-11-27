@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  city_name: Barranquilla
+  transport: MyString
+  trip: 
+
+two:
+  city_name: Bogota
+  transport: MyString
+  trip: 

@@ -1,0 +1,13 @@
+class CreateTripCities < ActiveRecord::Migration
+  def change
+    create_table :trip_cities do |t|
+
+      t.integer :id
+      t.string :transport
+      t.references :trip
+
+      t.timestamps
+    end
+    add_index :trip_cities, :trip_id
+  end
+end

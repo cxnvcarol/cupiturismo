@@ -1,0 +1,19 @@
+<h1> Buscar eventos</h1>
+
+<%= form_tag(controller: "events", action: "search_results", method: "get") do%>
+
+
+      <%= text_field_tag(:city, @trip_city.city_name, :hidden=>'hidden') %>
+    <%= text_field_tag(:trip_city_id, @trip_city.id, :hidden=>'hidden') %>
+    <%= text_field_tag(:date_range, @trip_city.start_date.strftime("%Y%m%d")+"00-"+@trip_city.end_date.strftime("%Y%m%d")+"00", :hidden=>'hidden') %>
+
+
+
+    <div class="field">
+      <%= label_tag(:words, "Palabras clave") %>
+      <%= text_field_tag(:words) %>
+    </div>
+<div class="actions">
+  <%= submit_tag("Buscar") %>
+</div>
+<% end %>

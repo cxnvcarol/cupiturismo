@@ -1,0 +1,18 @@
+<h1>Eventos encontrados</h1>
+
+<%# do for each%>
+
+<% @results.each do |result| %>
+    <div>
+        <h2><%= result['title']%></h2>
+      <label>Fecha de inicio: </label><label><%= result['start_time']%></label>     <br/>
+      <label>Fecha fin: </label><label><%= result['stop_time']%></label>  <br/>
+      <label>Descripción:</label><br>
+      <div>
+        <%= result['description']%>
+      </div>
+      <br/>
+      <div>Más información <a href=<%= result['url'] %>>aquí</a></div>
+    </div>
+
+<% end %>

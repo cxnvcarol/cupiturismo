@@ -1,0 +1,89 @@
+<input id="idTrip" hidden="hidden" value=<%= @trip.id %>  />
+<%= form_for(@trip) do |f| %>
+  <% if @trip.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@trip.errors.count, "error") %> prohibited this trip from being saved:</h2>
+
+      <ul>
+      <% @trip.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <p>
+      <b>Título:</b>
+      <%= @trip.tittle %>
+    </p>
+  <div class="field">
+    <%= f.label :begin_date %><br />
+    <%= f.datetime_select :begin_date %>
+  </div>
+    <div class="field">
+      <%= f.label :end_date %><br />
+      <%= f.datetime_select :end_date %>
+    </div>
+    <div class="field">
+      <%= f.number_field :user_id, :value=>current_user.id, :hidden=>'hidden' %>
+    </div>
+
+  <div class="actions">
+
+    <%= f.submit :value=>'Actualizar fechas' %>
+  </div>
+<% end %>
+
+
+<h1>Ciudades</h1>
+
+<table>
+  <tr>
+
+    <th>Ciudad</th>
+    <th>Transporte</th>
+    <th></th>
+    <th></th>
+
+  </tr>
+
+  <% @trip.trip_cities.each do |trip_city| %>
+      <tr>
+
+        <td><%= trip_city.city_name %> </td>
+        <td><%= trip_city.transport %></td>
+        <td><%= link_to 'Show', trip_city %></td>
+        <td><%= link_to 'Edit', edit_trip_city_path(trip_city) %></td>
+        <td><%= link_to 'Destroy', trip_city,'Are you sure?',:delete %></td>
+      </tr>
+  <% end %>
+</table>
+<a href="#" onclick="agregarCiudad">Agregar ciudad</a>
+
+
+<div id="addCity">
+  <h2>Add a city:</h2>
+
+  <%= form_for([@trip, @trip.trip_cities.build]) do |f| %>
+
+      <div class="field">
+        <%= f.label :city_name %><br />
+        <%= f.text_field :city_name %>
+      </div>
+      <div class="field">
+        <label> Voy a llegar en: (transporte)</label><br />
+        <%= f.text_field :transport %>
+      </div>
+      <div class="field">
+        <%= f.label :start_date %><br />
+        <%= f.datetime_select :start_date %>
+      </div>
+      <div class="field">
+        <%= f.label :end_date %><br />
+        <%= f.datetime_select :end_date %>
+      </div>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+  <% end %>
+</div>

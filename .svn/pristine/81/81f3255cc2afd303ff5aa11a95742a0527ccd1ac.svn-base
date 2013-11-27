@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<%= form_tag("/trips/sendMail") %>
+<p>
+<h1>Compartir Itinerario</h1>
+  Si desea compartir su itinerario, digite el correo del destinatario a continuación:
+</p>
+<p>
+  <b>Correo Destinatario:</b>
+  <%= text_field_tag('mailD') %>
+</p>
+<p>
+  <b style="
+  float: left;
+  ">Mensaje a enviar:</b>
+  <%=text_area_tag(:msg, content = "Hola \n\nEste es mi nuevo itinerario "+@trip.tittle+" echale un vistazo <a href='http://localhost:3000/trips/'"+@trip.id+"'>aqu&iacute;</a>.\n\nGracias \n ",:size=> "25x10"  )%>
+  <%= hidden_field_tag(:msg1, value ="<h1>Events in this trip:</h1><br><br>"+"<a href="+"http://localhost:3000"+request.fullpath+">Link</a>") %>
+</p>
+<%= submit_tag("Send") %>
+<%= button_to 'Volver', trips_path %>
+
+
+
+

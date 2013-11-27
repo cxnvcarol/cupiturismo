@@ -1,0 +1,22 @@
+<h1>Tus itinerarios</h1>
+<table>
+  <tr>
+    <th>T&iacutetulo</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @itinerarios.each do |itinerario| %>
+  <tr>
+    <td><%= itinerario.tittle %></td>
+    <td><%= link_to 'Show', itinerario %></td>
+    <td><%= link_to 'Edit', edit_itinerario_path(itinerario) %></td>
+    <td><%= link_to 'Destroy', itinerario, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Itinerario', new_itinerario_path %>

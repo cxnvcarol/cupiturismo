@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<%= form_tag("/users/sendRMail") %>
+<p>
+<h1>Recomendar Cupiturismo</h1>
+  Si desea recomendar nuestro programa, digite el correo del destinatario a continuación:
+</p>
+<p>
+  <b>Correo Destinatario:</b>
+  <%= text_field_tag('mailR') %>
+</p>
+<p>
+  <b style="
+  float: left;
+  ">Escriba un mensaje recomendandonos:</b>
+  <%=text_area_tag(:msg,content="",:size=> "25x10"   )%>
+  <%= hidden_field_tag(:msg1, value ="<h1>Events in this trip:</h1><br><br>"+"<a href="+"http://localhost:3000"+request.fullpath+">Link</a>") %>
+</p>
+<%= submit_tag("Send") %>
+<%= button_to 'Volver', trips_path %>
+
+
+
+

@@ -1,0 +1,24 @@
+<% provide(:reglasCss, "ingreso") %>
+<div id="ingreso">
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+  <%= f.email_field :email, :placeholder => "Nombre de usuario",:autofocus => true %>
+  <%= f.password_field :password, :placeholder => "Contrasena" %>
+  <% if devise_mapping.rememberable? -%>
+  <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+  <% end -%>
+  <%= f.submit "Entrar" %>
+<% end %>
+
+</div>
+
+<div id="registro">
+   <h2>Registrate en CupiTurismo</h2>
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
+      <%= f.text_field :name,:placeholder => "Nombre completo", :autofocus => true %>
+      <%= f.email_field :email,:placeholder => "Email" %>
+      <%= f.password_field :password, :placeholder => "Contraseña" %>
+      <%= f.password_field :password_confirmation, :placeholder => "Repite la contraseña" %>
+      <%= f.submit "Registrarse" %>
+  <% end %>
+</div>

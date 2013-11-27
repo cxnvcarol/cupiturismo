@@ -1,0 +1,19 @@
+<div id="wrapper">
+<h1> Buscar eventos</h1>
+
+<%= form_tag(controller: "events", action: "search_results", method: "get") do%>
+
+    <div class="field">
+      <%= label_tag(:city, "Ciudad") %>
+      <%= text_field_tag(:city) %>
+    </div>
+
+    <div class="field">
+      <%= label_tag(:words, "Palabras clave") %>
+      <%= text_field_tag(:words) %>
+    </div>
+<div class="actions">
+  <%= submit_tag("Buscar") %>
+</div>
+<% end %>
+</div>

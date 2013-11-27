@@ -1,0 +1,26 @@
+<h1>Contactos</h1>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Telefono</th>
+    <th>Email</th>
+    <th>Pais</th>
+    <th>Cumpleaños</th>
+    <th>Foto</th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.name %></td>
+    <td><%= user.Telephone %></td>
+    <td><%= user.email %></td>
+    <td><%= user.Country %></td>
+    <td><%= user.Birthday %></td>
+    <td><%=image_tag user.image.url(:thumb) %></td>
+  </tr>
+<% end %>
+</table>
+<%= button_to 'Recomendar CupiTurismo',recommend_path(current_user) %>
+<br />
+

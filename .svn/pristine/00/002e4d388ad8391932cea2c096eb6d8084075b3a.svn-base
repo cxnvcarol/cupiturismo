@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CupiTurismo</title>
+  <%=stylesheet_link_tag yield(:reglasCss) %>
+  <%=stylesheet_link_tag "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<% if user_signed_in? %>
+    <div id="usuario">
+      <p><%= current_user.name %></p>
+      <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+    </div>
+
+<% end %>
+<div id="wrapper1">
+<%= yield %>
+</div>
+
+<script src="/assets/jquery.fancybox.js"></script>
+<script src="/assets/jquery.fancybox.pack.js"></script>
+</body>
+</html>

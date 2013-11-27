@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>City:</b>
+  <%= @trip_city.city_name %>
+</p>
+
+
+<p>
+  <b>Transport:</b>
+  <%= @trip_city.transport %>
+</p>
+
+
+
+<%#= link_to 'Edit', edit_trip_city_path(@trip_city) %>
+<%#= link_to 'Back', trip_cities_path %>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Descripción</th>
+    <th>Fecha de inicio</th>
+    <th>Fecha Fin</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @trip_city.events.each do |event| %>
+      <tr>
+        <td><%= event.name %></td>
+        <td><%= event.description %></td>
+        <td><%= event.begin_date %></td>
+        <td><%= event.end_date %></td>
+        <td><%= link_to 'Ver detalles', event %></td>
+        <td><%= link_to 'Editar', edit_event_path(event) %></td>
+        <td><%= link_to 'Borrar', event, confirm: 'Estás segur@?', method: :delete %></td>
+      </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Nuevo Evento', new_event_path(:trip_city_id=>@trip_city.id) %>

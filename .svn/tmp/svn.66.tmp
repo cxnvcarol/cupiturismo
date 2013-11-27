@@ -1,0 +1,162 @@
+
+
+<div id="itinerarios">
+  <div id="encabezadoIt">
+    <p>Tus itinerarios</p>
+    <a href="#modal_new_trip" class="llama_modal">+</a>
+  </div>
+  <% if @trips.count==0 %>
+      <div class="itinerario"><p>Aun no tienes viajes programados</p></div>
+  <% else %>
+    <% @trips.each do |trip|%>
+       <div class="itinerario"><p id=<%= trip.id %> value=<%= trip.tittle %>><%= trip.tittle %></p>
+         <%= link_to 'Compartir',share_path(trip) %>
+         <%= link_to 'Editar', edit_trip_path(trip)%>
+         <%= link_to 'Eliminar', trip, confirm: 'Estás segur@?', method: :delete %>
+       </div>
+    <% end %>
+  <% end %>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=weather"></script>
+<script type="text/javascript">
+
+    var map;
+
+    var markers = [];
+
+
+
+    $(".itinerario").click(function()
+            {
+                    var myLatlng = new google.maps.LatLng(37.783259, -122.402708);
+                    var myOptions = {
+                        zoom: 1,
+                        center: myLatlng,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+                    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+                    var weatherLayer = new google.maps.weather.WeatherLayer({
+                        temperatureUnits: google.maps.weather.TemperatureUnit.FAHRENHEIT
+                    });
+                    weatherLayer.setMap(map);
+
+                    var cloudLayer = new google.maps.weather.CloudLayer();
+                    cloudLayer.setMap(map);
+
+                 var id_itinerario = $(this).find("p").attr("id");
+
+                    var j2=[];
+                    $.ajax({
+                        url: "/trips/all_events/" +id_itinerario,
+                        type: "GET",
+                        dataType : "json",
+                        success: function( eventos) {
+                            var it =0;
+                            for(it =0;it<eventos.length;it++)
+                            {
+                                j2=$.parseJSON(eventos[it])
+                                var stringLatitude=j2.place.latitude;
+                                var stringLongitude=j2.place.longitude;
+                                var stringCity=j2.place.city;
+                                addMarker(stringLatitude,stringLongitude,stringCity);
+                            }
+                        },
+                        error: function( xhr, status ) {
+                            //alert( "Sorry, there was a problem!" );
+                            console.log('errorItinerarioClick: '+xhr+"- "+status);
+                            //better don't show
+                        }
+                    });
+
+
+            }
+    );
+
+
+
+    function addMarker( lat ,lon , enventName , cityName )
+    {
+        if(lat == null)
+        {
+            addWithCityName(enventName,cityName);
+        }
+        else
+        {
+            add(lat , lon , enventName);
+        }
+    };
+
+    function addWithCityName(name , city)
+    {
+            var geocoder = new google.maps.Geocoder();
+
+            geocoder.geocode({ 'address':city }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK)
+                {
+                    var latitude = results[0].geometry.location.lat();
+                    var longitude = results[0].geometry.location.lng();
+
+                    add(latitude, longitude, name );
+                }
+                else
+                {
+                    //alert("Request failed.")
+                    console.log("Request google map failed")
+                }
+            });
+    };
+
+    function add( lat ,lon , txt)
+    {
+        var ll = new google.maps.LatLng(lat,lon);
+
+        var marker = new google.maps.Marker
+        ({
+            position: ll,
+            map:map
+        });
+
+        map.setZoom(5);
+        var infowindow = new google.maps.InfoWindow
+        ({
+            content: txt
+        });
+
+        google.maps.event.addListener(marker, 'click', function(){
+            infowindow.open(map,marker);
+        });
+
+        markers.push(marker);
+
+        map.setCenter(ll);
+    };
+
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="assets/calendario.js"></script>
+<script src="assets/jquery.fancybox.js"></script>
+<script src="assets/jquery.fancybox.pack.js"></script>
+<script src="assets/tripScripts.js"></script>
+<script type ="text/javascript">
+    $(function() {
+        // Handler for .ready() called.
+        $("#map_canvas").css("left","-0px").css("top","-15px");
+    });
+
+</script>
+
+
+<div id="map_canvas">No has seleccionado ningún itinerario. Selecciona uno para visualizar.</div>
+
+<div id="modal_new_trip" style="display: none;">
+  <h2>Nuevo viaje:</h2>
+  <%= render 'form' %>
+  <%= link_to 'Back', trips_path %>
+</div>

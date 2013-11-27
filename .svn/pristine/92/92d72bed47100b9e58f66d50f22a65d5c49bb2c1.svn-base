@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  begin_date: 2013-09-15 18:10:33
+  description: MyString
+  end_date: 2013-09-15 18:10:33
+  id: 1
+  name: MyString
+  picture_link: MyString
+  rating: 1.5
+  trip_city: 
+
+two:
+  begin_date: 2013-09-15 18:10:33
+  description: MyString
+  end_date: 2013-09-15 18:10:33
+  id: 2
+  name: MyString
+  picture_link: MyString
+  rating: 1.5
+  trip_city: 

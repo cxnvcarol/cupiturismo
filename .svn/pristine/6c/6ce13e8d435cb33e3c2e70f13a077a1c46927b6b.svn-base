@@ -1,0 +1,29 @@
+<h1>Eventos encontrados</h1>
+
+<% if @results.count()==0%>
+
+<div id="sin_eventos">No se encontraron eventos para esta ciudad</div>
+
+<% else %>
+
+<% @results.each do |result| %>
+
+    <div class="item_event">
+        <h2><%= result['title']%></h2>
+      <label>Fecha de inicio: </label><label><%= result['start_time']%></label>     <br/>
+      <label>Fecha fin: </label><label><%= result['stop_time']%></label>  <br/>
+      <br/>
+      <div>
+        <%= raw result['description']%>
+      </div>
+      </div>
+
+
+      <br/>
+      <div>Más información <a target="_blank" href=<%= result['url'] %> >aquí</a></div>
+
+
+<% end %>
+<% end %>
+
+

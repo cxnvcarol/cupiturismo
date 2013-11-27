@@ -1,0 +1,12 @@
+<h1>Nuevo evento</h1>
+  <h2>Agrega tu propio evento...</h2>
+
+<%= render 'form' %>
+
+  <br />
+  <h2>O busca eventos en la ciudad de <%= @event.trip_city.city_name %>
+    <a href="/events/search_date/<%= @event.trip_city.id %>"><b>aquí</b></a></h2>
+
+<%= link_to 'Back', trip_city_path(@event.trip_city_id) %>
+<%= text_field_tag(:city, @event.trip_city.city_name, :hidden=>'hidden') %>
+<%= text_field_tag(:trip_city_id, @event.trip_city.id, :hidden=>'hidden') %>

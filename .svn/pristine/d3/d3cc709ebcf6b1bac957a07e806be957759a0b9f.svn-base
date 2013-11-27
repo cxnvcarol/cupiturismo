@@ -1,0 +1,270 @@
+body{
+    padding:0;
+    margin:0;
+}
+
+.item_event{
+    border-bottom-style: groove;
+    clear:both;
+    padding-bottom: 15px;
+}
+.link_modal{
+    float:left;
+    width:100% ;
+    text-align: center;
+    clear:both;
+}
+#map_canvas {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    top: 25px;
+    left: -70px;
+    border: 1px solid grey;
+}
+
+#wrapper{
+    background-color: #ffffff;
+    opacity: 0.85;
+    width: 820px;
+    min-height: 720px;
+    padding: 20px;
+    margin: 10px;
+    margin-left:auto;
+    margin-right:auto;
+    position: relative;
+    bottom: 0;
+    border-left: 1px solid #2f5bb7;
+    border-right: 1px solid #2f5bb7;
+}
+#usuario{
+    position: relative;
+    height: 30px;
+    background-color: #4d90fe;
+    border: 1px solid #2f5bb7;
+}
+
+#usuario>p{
+    margin-top: 5px;
+    margin-left: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    float:left;
+}
+#usuario a{
+    font-size: 15px;
+    float: right;
+    margin:5px 30px;
+    text-decoration: none;
+    font-style: italic;
+    color: #333;
+}
+#usuario a:hover{
+    text-decoration: underline;
+    color:#fff;
+}
+
+#itinerarios{
+    position: relative;
+    top: 20px;
+    width: 370px;
+    border-radius: 5px;
+    border-top: 1px solid #2f5bb7;
+    border-left: 1px solid #2f5bb7;
+    border-right: 1px solid #2f5bb7;
+}
+#encabezadoIt{
+    position: relative;
+    margin-top: 0;
+    width: 100%;
+    height: 40px;
+    background-color: #4d90fe;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: 1px solid #2f5bb7;
+}
+#encabezadoIt>p{
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 30px;
+    font-size: 25px;
+}
+#encabezadoIt>a{
+    position: absolute;
+    bottom: 3px;
+    right: 5px;
+    text-decoration: none;
+}
+.itinerario{
+    clear: both;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #2f5bb7;
+    height: 25px;
+    text-align: left;
+}
+.itinerario p{
+    margin-left: 20px;
+    float: left;
+}
+.itinerario a{
+    float: right;
+    margin: 10px 5px;
+}
+
+#googleMap{
+    position: relative;
+    top: 60px;
+    height: 370px;
+    width: 370px;
+    /*left: -75px;*/
+    overflow: visible!important;
+    border: 1px solid #2f5bb7;
+    background-color: #4d90fe;
+}
+#target {
+    width: 345px;
+    border: 1px solid #2f5bb7;
+}
+#calendario{
+    position: absolute;
+    top:20px;
+    right: 20px;
+    background-color:white;
+}
+#calendario table{
+    width:370px;
+    height:250px;
+    border: 1px solid #2f5bb7;
+    border-top-right-radius:10px;
+    border-top-left-radius:10px;
+    border-spacing:0;
+    table-layout: fixed;
+}
+#calendario th{
+    background-color:#4d90fe;
+    color:white;
+    text-align:center;
+    vertical-align:middle;
+    font:25px arial,sans-serif;
+}
+#calendario td{
+    text-align:center;
+    vertical-align:middle;
+    position:relative;
+    font:20px arial,sans-serif;
+    width: 14%;
+}
+.m,.nm{
+    border-top:1px solid #2f5bb7;
+}
+#ant{
+    border-top-left-radius:10px;
+}
+#sig{
+    border-top-right-radius:10px;
+}
+.nm{
+    color:#9c9c9c;
+}
+#ant, #sig{
+    font:25px arial,sans-serif;
+}
+.nm:hover{
+    background-color:#8F8A8A;
+}
+.m:hover{
+    background-color:#8F8A8A;
+}
+#hoy{
+    background-color:#d8d8d8;
+}
+#panelDia{
+    position:absolute;
+    border:1px solid #2f5bb7;
+    border-bottom: 2px solid #2f5bb7;
+    width:370px;
+    height: 324px;
+    top:340px;
+    right: 15px;
+    background-color:white;
+    margin:0px;
+    padding:0px;
+    overflow: hidden;
+}
+#hpd{
+    border: 1px solid #2f5bb7;
+    background-color: #ffffff;
+    position: absolute;
+    right:15px;
+    width: 370px;
+    height: 50px;
+    top: 290px;
+}
+.hora{
+    position:relative;
+    border-top:1px solid #2f5bb7;
+    border-bottom:1px solid #2f5bb7;
+    width:435px;
+    height:45px;
+    margin:0px;
+    padding:0px;
+    background-color:transparent;
+}
+
+.hora>p{
+    position:relative;
+    font: 15px arial;
+    top:-15px;
+    left:2px;
+    color:gray;
+    z-index:2;
+}
+#horas{
+    height: 1080px;
+    position: absolute;
+}
+#pdh0{
+    border-top:0px;
+    height:30px;
+}
+
+#pdh9, #pdh23{
+    border-bottom:0px;
+}
+.scrollbar{
+    position:absolute;
+    background:white;
+    top:0px;
+    right:0px;
+    width:15px;
+    height:100%;
+    border-left:1px solid #2f5bb7;
+}
+.scroll{
+    background:#2f5bb7;
+    position:absolute;
+    top:0px;
+    right:0px;
+    height:25%;
+    width:100%;
+}
+.evento{
+    width:99.7%;
+    background:rgba(185, 9, 11, .2);
+    z-index:1;
+
+}
+#e1{
+    position:absolute;
+    height:80px;
+    top:0px;
+}
+.evento p
+{
+    position:absolute;
+    font: 15px arial;
+}
+
+.viajando{
+    background: red;
+}

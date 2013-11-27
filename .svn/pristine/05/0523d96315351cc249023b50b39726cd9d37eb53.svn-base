@@ -1,0 +1,2 @@
+select * from itinerarios
+select * from users

@@ -1,0 +1,30 @@
+<p id="intro">En esta sección podrás explorar los itinerarios de otros usuarios de Cupiturismo. Si no deseas compartir tus propios itinerarios puedes marcarlo como privado.</p>
+
+<div id="itinerarios" class="explore">
+  <div id="encabezadoIt">
+    <p>Explora..</p>
+  </div>
+  <% if @trips.count==0 %>
+      <div class="itinerario"><p>Lo sentimos. No se encontraron itinerarios p&uacute;blicos.</p></div>
+  <% else %>
+      <table>
+        <tr>
+          <th>Itinerario</th>
+          <th>Viajero</th>
+          <th></th>
+        </tr>
+    <% @trips.each do |trip|%>
+
+            <tr class="itinerario">
+              <td><p id=<%= trip.id %> value=<%= trip.tittle %>><%= trip.tittle %></p>  </td>
+              <td><p><%= trip.user.name %></p></td>
+              <td><%= link_to 'Ver detalles', trip_path(trip)%></td>
+            </tr>
+    <% end %>
+</table>
+  <% end %>
+</div>
+
+<script src="/assets/jquery.fancybox.js"></script>
+<script src="/assets/jquery.fancybox.pack.js"></script>
+<script src="/assets/tripScripts.js"></script>

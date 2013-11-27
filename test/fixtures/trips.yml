@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  tittle: trip1
+  begin_date: 2013-09-06 11:41:11
+
+two:
+  tittle: trip2
+  begin_date: 2013-09-06 11:41:11
+  user_id: 2
+
+antes:  #es para probar que no se pueda agregar un trip con unca fecha anterior de la actual
+  tittle: antes
+  begin_date: Time.now - 10.days
+

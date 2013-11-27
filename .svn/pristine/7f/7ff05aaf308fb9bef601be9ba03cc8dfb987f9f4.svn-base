@@ -1,0 +1,11 @@
+class CreateItinerarios < ActiveRecord::Migration
+  def change
+    create_table :itinerarios do |t|
+      t.string :id
+      t.string :title
+      t.datetime :createdDate
+
+      t.timestamps
+    end
+  end
+end
