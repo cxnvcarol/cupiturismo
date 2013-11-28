@@ -1,6 +1,7 @@
 require "bundler/capistrano"
 
-set :application, "cupiturismo"
+
+set :application, "Cupiturismo"
 set :user, "cupiturismo"
 
 
@@ -9,7 +10,6 @@ set :repository, "git@github.com:cxnvcarol/cupiturismo.git"
 set :branch, "master"
 set :use_sudo, true
 
-set :bundle_flags, "--no-deployment --quiet"
 
 server "cupiturismo.cloudapp.net", :web, :app, :db, primary: true
 
