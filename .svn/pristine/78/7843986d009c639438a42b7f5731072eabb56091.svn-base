@@ -1,0 +1,56 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b><h4>Perfil de Usuario:</h4></b>
+</p>
+
+<p>
+<b>Foto de Perfil</b>
+</p>
+
+</p>
+<%= image_tag @user.image.url(:medium) %>
+</p>
+<p>
+  <b>Nombre:</b>
+  <%= @user.name %>
+</p>
+
+<p>
+  <b>Correo Electronico:</b>
+  <%= @user.email %>
+</p>
+
+<p>
+  <b>Telefono:</b>
+  <%= @user.Telephone %>
+</p>
+
+<p>
+  <b>País:</b>
+  <%= @user.Country %>
+</p>
+
+<p>
+  <b>Ciudad Nacimiento:</b>
+  <%= @user.City %>
+</p>
+
+<p>
+  <b>Direccion:</b>
+  <%= @user.Address %>
+</p>
+
+<p>
+  <b>Fecha de Nacimiento:</b>
+  <%= @user.Birthday %>
+</p>
+
+<p>
+  <b>Genero:</b>
+  <%= @user.Gender %>
+</p>
+
+<%= button_to 'Actualizar Informacion', act_path(current_user) %>
+
+<%= button_to 'Back', users_path %>
